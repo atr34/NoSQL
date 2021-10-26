@@ -5,8 +5,8 @@ def bucket():
     s3 = boto3.resource(
         service_name='s3',
         region_name='us-east-2',
-        aws_access_key_id='************',
-        aws_secret_access_key='*****************'
+        aws_access_key_id='*************',
+        aws_secret_access_key='******************'
     )
 
 
@@ -24,13 +24,13 @@ def bucket():
     #Create the dynamodb database
     dyndb = boto3.resource('dynamodb',
         region_name='us-east-2',
-        aws_access_key_id='AKIAZTW5UUKALBPIASER',
-        aws_secret_access_key='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'
+        aws_access_key_id='AKIAZTW5UUKAITKAJZ7S',
+        aws_secret_access_key='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'
     )  
 
     try:
         table = dyndb.create_table(
-            TableName='csv_table',
+            TableName='DataTable',
             KeySchema = 
             [
                 {
@@ -63,10 +63,10 @@ def bucket():
         print (e)  
 
         #if there is an exception, the table may already exist. if so...
-        table = dyndb.Table('csv_table')
+        table = dyndb.Table("DataTable")
 
     #wait for the table to be created
-    table.meta.client.get_waiter('table_exists').wait(TableName='csv_table')
+    table.meta.client.get_waiter('table_exists').wait(TableName='DataTable')    
     print(table.item_count)
 
     with open('experiments.csv', 'r') as csvfile:
@@ -79,7 +79,7 @@ def bucket():
                 continue
             print('body')
             s3.Object('datacont-name', item[4]).put(Body=body)
-            md = s3.Object('datacont-name', item[4]).Acl().put(ACL='public-read')
+            md = s3.Object('datacont-name', item[4]).Acl().put(ACL='public-write')
             url = " https://s3-us-east-2.amazonaws.com/datacont-name/"+item[3]
             metadata_item = {'PartitionKey': item[0], 'RowKey': item[1],
                 'description' : item[4], 'date' : item[2], 'url':url}
