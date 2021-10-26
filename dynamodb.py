@@ -24,8 +24,8 @@ def bucket():
     #Create the dynamodb database
     dyndb = boto3.resource('dynamodb',
         region_name='us-east-2',
-        aws_access_key_id='AKIAZTW5UUKAITKAJZ7S',
-        aws_secret_access_key='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'
+        aws_access_key_id='*******************************',
+        aws_secret_access_key='*****************************'
     )  
 
     try:
