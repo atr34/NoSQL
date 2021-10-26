@@ -5,8 +5,8 @@ def bucket():
     s3 = boto3.resource(
         service_name='s3',
         region_name='us-east-2',
-        aws_access_key_id='AKIAZTW5UUKAECOO7D6X',
-        aws_secret_access_key='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'
+        aws_access_key_id='************',
+        aws_secret_access_key='*****************'
     )
 
 
